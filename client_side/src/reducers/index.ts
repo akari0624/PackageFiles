@@ -1,8 +1,14 @@
 import { combineReducers } from 'redux'
+import {FileRootPathState} from './__reducers/rootPathReducer'
+import FileRootPathStateEmitter from './__reducers/rootPathReducer'
 
-const rootReducer = combineReducers({
+export interface WholeStateInRedux {
+  fileRoot: FileRootPathState,
+}
 
-    state: (state= {}) => state
+const wholeReducState = combineReducers({
+
+  fileRoot: FileRootPathStateEmitter,
 })
 
-export default rootReducer
+export default wholeReducState

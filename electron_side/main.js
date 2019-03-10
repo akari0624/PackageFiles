@@ -9,7 +9,7 @@ function createWindow () {
     win.loadFile(`dist/index.html`)
 
 
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     ipcMain.on('invokeselectRootDirectory',(data)=>{
       
