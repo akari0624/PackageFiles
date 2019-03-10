@@ -27,7 +27,9 @@ export enum PathType {
 interface PropsFromUpperLevel {
   toDoWhat: string
   btnText: string
-  pathType: PathType
+  pathType: PathType,
+  needToChooseRootDirectoryIPCKey: string,
+  rootDirectoryChoosedIPCKey: string,
 }
 
 interface PropsFromRedux {
@@ -62,7 +64,7 @@ class FileInputAndBtPair extends Component<Props, State> {
 
   handleOnDirectorySelected = () => {
     //呼叫electron
-    ipcRenderer.send('invokeselectRootDirectory', 'dataForIpc');
+    ipcRenderer.send(this.props.needToChooseRootDirectoryIPCKey, 'dataForIpc');
   };
 
   handleDirectoryPathChanged = (e: React.FormEvent<HTMLInputElement>) => {
@@ -93,7 +95,7 @@ class FileInputAndBtPair extends Component<Props, State> {
   }
 
   componentDidMount() {
-    ipcRenderer.on('rootDirectoryChoosed', (event: any, msg: string[]) => {
+    ipcRenderer.on(this.props.rootDirectoryChoosedIPCKey, (event: any, msg: string[]) => {
       if (this.props.pathType === PathType.sourceRoot) {
         this.props.updateSourceFileRootPath(msg[0])
       }else if (this.props.pathType === PathType.distRoot) {

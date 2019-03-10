@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain, dialog } = require('electron')
-
+const ipcChannelKeys = require('../ipcChannel/ipcChannelKey')
 
 function createWindow () {
     // Create the browser window.
@@ -11,7 +11,7 @@ function createWindow () {
 
     // win.webContents.openDevTools()
 
-    ipcMain.on('invokeselectRootDirectory',(data)=>{
+    ipcMain.on(ipcChannelKeys.needToChoosesourceRootDictory,(data)=>{
       
         console.log(`receive data from client: ${data}`)
         dialog.showOpenDialog(win, {
@@ -19,10 +19,23 @@ function createWindow () {
         }, (filePaths)=>{
     
             console.log(filePaths)
-            win.webContents.send("rootDirectoryChoosed", filePaths)
+            win.webContents.send(ipcChannelKeys.sourceRootDictoryChoosed, filePaths)
         })
 
     })
+
+    ipcMain.on(ipcChannelKeys.needToChooseRootDistDictory,(data)=>{
+      
+      console.log(`receive data from client: ${data}`)
+      dialog.showOpenDialog(win, {
+          properties:['openDirectory']
+      }, (filePaths)=>{
+  
+          console.log(filePaths)
+          win.webContents.send(ipcChannelKeys.distRootDictoryChoosed, filePaths)
+      })
+
+  })
 
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
