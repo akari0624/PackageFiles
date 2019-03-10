@@ -4,4 +4,7 @@ module.exports =
   needToChooseRootDistDictory: 'needToChooseRootDistDictory',
   sourceRootDictoryChoosed: 'sourceRootDictoryChoosed',
   distRootDictoryChoosed: 'distRootDictoryChoosed',
+
+  startToChooseFilesIPCKey: 'startToChooseFilesIPCKey',
+  fileChooseCompleteIPCKey: 'fileChooseCompleteIPCKey',
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Styled from "styled-components";
-import FileInputAndBtPair, {PathType} from "./container/FileInputAndBtPair";
+import FileInputAndBtPair, {PathType} from "./container/FileInputAndBtPair"
+import FileChooserInputBtPair from './container/FileChooserInputBtPair'
 const ipcChannelKey  = require('../../../ipcChannel/ipcChannelKey')
 
 /** in Typescript, we need to write a interface(I feel more like a protocol) to the incoming props
@@ -36,6 +37,12 @@ export default (props: Props) => {
           pathType={PathType.distRoot} 
           needToChooseRootDirectoryIPCKey={ipcChannelKey.needToChooseRootDistDictory}
           rootDirectoryChoosedIPCKey={ipcChannelKey.distRootDictoryChoosed}
+        />
+        <FileChooserInputBtPair
+          toDoWhat="選取須打包的檔案"
+          btnText="選擇"
+          startToChooseFilesIPCKey={ipcChannelKey.startToChooseFilesIPCKey}
+          fileChooseCompleteIPCKey={ipcChannelKey.fileChooseCompleteIPCKey}
         />
       </AlignLeftDiv>
     </MiddleDivWrapper>

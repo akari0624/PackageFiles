@@ -11,7 +11,7 @@ function createWindow () {
 
     // win.webContents.openDevTools()
 
-    ipcMain.on(ipcChannelKeys.needToChoosesourceRootDictory,(data)=>{
+    ipcMain.on(ipcChannelKeys.needToChoosesourceRootDictory,(evt, data)=>{
       
         console.log(`receive data from client: ${data}`)
         dialog.showOpenDialog(win, {
@@ -24,7 +24,7 @@ function createWindow () {
 
     })
 
-    ipcMain.on(ipcChannelKeys.needToChooseRootDistDictory,(data)=>{
+    ipcMain.on(ipcChannelKeys.needToChooseRootDistDictory,(evt, data)=>{
       
       console.log(`receive data from client: ${data}`)
       dialog.showOpenDialog(win, {
@@ -36,6 +36,20 @@ function createWindow () {
       })
 
   })
+
+   // 一定要記住 ipcMain.on的callback裡 第一個參數是event,第二個參數開始才是client side傳過來的資料
+  ipcMain.on(ipcChannelKeys.startToChooseFilesIPCKey,(evt, sourceDictPath)=>{
+      console.log(`path:${sourceDictPath}`) 
+    dialog.showOpenDialog(win, {
+        defaultPath: `${sourceDictPath}`,
+        properties:['openFile', 'multiSelections']
+    }, (filePaths)=>{
+
+        console.log(filePaths)
+        win.webContents.send(ipcChannelKeys.fileChooseCompleteIPCKey, filePaths)
+    })
+
+})
 
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
