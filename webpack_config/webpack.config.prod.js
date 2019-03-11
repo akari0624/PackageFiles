@@ -15,7 +15,7 @@ if(process.env.NODE_ENV === WEBPACK_Config_Base.NODE_ENV_Keywords.TRANSPILE_WITH
   __LOADERS_ARR = WEBPACK_Config_Base.JS_TRANSPILE_LOADER_ARR_OPTIONS.ONLY_TS_LOADER
 }
 
-module.exports = {
+const client_config = {
   entry: WEBPACK_Config_Base.ENTRY_POINT,
   output: {
     path: path.join(__dirname, '../', 'dist'),
@@ -77,3 +77,40 @@ module.exports = {
     fs: 'empty'
 }
 }
+
+const electron_config = {
+  target: 'electron-main',
+  entry: path.join(__dirname, '../', './electron_side/src/main.ts'),
+  output: {
+      path: path.join(__dirname, '../', 'dist'),
+      filename: 'main.js'
+  },
+  // plugins: [
+  //     new NodemonPlugin(),
+  // ],
+  // Enable sourcemaps for debugging webpack's output.
+  devtool: 'source-map',
+
+  resolve: {
+    modules: [
+      path.join(__dirname, '../', 'node_modules'),
+      'node_modules'
+    ],
+      extensions: ['.ts', '.js', '.json']
+  },
+  module: {
+    rules: [
+        // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+        { test: /\.tsx?$/, loader: WEBPACK_Config_Base.JS_TRANSPILE_LOADER_ARR_OPTIONS.ONLY_TS_LOADER },
+
+        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+        { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
+    ]
+},
+ //  externals: [nodeExternals()],
+  node: {
+      __dirname: false
+  }
+};
+
+module.exports = [electron_config, client_config]
