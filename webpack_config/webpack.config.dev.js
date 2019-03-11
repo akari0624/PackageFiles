@@ -4,8 +4,6 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const WEBPACK_Config_Base = require('./webpack.config.base');
-const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
-const nodeExternals = require('webpack-node-externals');
 
 
 let __LOADERS_ARR;
@@ -74,43 +72,6 @@ const client_config = {
 };
 
 
-const electron_config = {
-  target: 'electron-main',
-  entry: path.join(__dirname, '../', './electron_side/src/main.ts'),
-  output: {
-      path: path.join(__dirname, '../', 'dist'),
-      globalObject:'this',
-      filename: 'main.js'
-  },
-  // plugins: [
-  //     new NodemonPlugin(),
-  // ],
-  plugins: [
-    new WriteFileWebpackPlugin()
-  ],
-  // Enable sourcemaps for debugging webpack's output.
-  devtool: 'source-map',
 
-  resolve: {
-    modules: [
-      path.join(__dirname, '../', 'node_modules'),
-      'node_modules'
-    ],
-      extensions: ['.ts', '.js', '.json']
-  },
-  module: {
-    rules: [
-        // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-        { test: /\.ts?$/, loader: WEBPACK_Config_Base.JS_TRANSPILE_LOADER_ARR_OPTIONS.TS_THEN_BABEL },
 
-        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-        { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
-    ]
-},
- externals: [nodeExternals()],
-  node: {
-      __dirname: false
-  }
-};
-
-module.exports = [client_config, electron_config]
+module.exports = client_config

@@ -12,6 +12,7 @@
     "moduleResolution": "node"             /* make ts compiler include type definitions linked in package.json files*/
   },
   "include": [
-    "./client_side/src"
+    "./client_side/src",
+    "./electron_side/src"
 ]
 }

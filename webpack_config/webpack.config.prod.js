@@ -113,4 +113,5 @@ const electron_config = {
   }
 };
 
+// multiple build in dist is ok
 module.exports = [electron_config, client_config]
