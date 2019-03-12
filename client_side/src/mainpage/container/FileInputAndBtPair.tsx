@@ -110,8 +110,8 @@ class FileInputAndBtPair extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = ({ fileRoot }: WholeStateInRedux, props: PropsFromUpperLevel):PropsFromRedux => {
-
+const mapStateToProps =
+({ fileRoot }: WholeStateInRedux, props: PropsFromUpperLevel):PropsFromRedux => {
   if (props.pathType === PathType.sourceRoot) {
     return { fileRootPath: fileRoot.sourceFilesRootPath }
   }else if (props.pathType === PathType.distRoot) {

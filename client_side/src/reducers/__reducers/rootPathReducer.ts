@@ -1,6 +1,5 @@
-import { RootPathType } from "../types";
-import { string } from "prop-types";
-
+import { RootPathType } from '../types'
+import { Reducer } from 'redux'
 export interface PathModifierAction {
   type: RootPathType;
   payload: string;
@@ -18,10 +17,10 @@ const defaultState: FileRootPathState = {
   distFileRootPath: '',
 }
 
-export default function (
+const rootPathReducer:Reducer<FileRootPathState, PathModifierAction> = (
   state: FileRootPathState = defaultState,
   action: PathModifierAction,
-) {
+):FileRootPathState => {
   switch (action.type) {
     case RootPathType.setSourceFilesRootPath:
       return { ...state, sourceFilesRootPath: action.payload }
@@ -31,3 +30,6 @@ export default function (
 
   return state
 }
+
+
+export default rootPathReducer

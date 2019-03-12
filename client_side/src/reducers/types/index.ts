@@ -4,3 +4,9 @@ export enum RootPathType {
     getSourceFilesRootPath,
     getDistFileRootPath,
 }
+
+
+export enum FilesPathType {
+    setFilesPath,
+    getFilesPath,
+}

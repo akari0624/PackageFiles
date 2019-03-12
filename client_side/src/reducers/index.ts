@@ -1,14 +1,17 @@
 import { combineReducers } from 'redux'
-import {FileRootPathState} from './__reducers/rootPathReducer'
-import FileRootPathStateEmitter from './__reducers/rootPathReducer'
+import rootPathReducer, {FileRootPathState} from './__reducers/rootPathReducer'
+import filePathsReducer, { FilesPath } from './__reducers/filePathsReducer'
+
 
 export interface WholeStateInRedux {
   fileRoot: FileRootPathState,
+  selectedFilesPath: FilesPath,
 }
 
 const wholeReducState = combineReducers({
 
-  fileRoot: FileRootPathStateEmitter,
+  fileRoot: rootPathReducer,
+  selectedFilesPath: filePathsReducer,
 })
 
 export default wholeReducState

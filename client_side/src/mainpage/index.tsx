@@ -2,6 +2,8 @@ import React from "react";
 import Styled from "styled-components";
 import FileInputAndBtPair, {PathType} from "./container/FileInputAndBtPair"
 import FileChooserInputBtPair from './container/FileChooserInputBtPair'
+import FileListAreaWrapperContainer from './container/FileListAreaWrapperContainer'
+
 const ipcChannelKey  = require('../../../ipcChannel/ipcChannelKey')
 
 /** in Typescript, we need to write a interface(I feel more like a protocol) to the incoming props
@@ -44,6 +46,7 @@ export default (props: Props) => {
           startToChooseFilesIPCKey={ipcChannelKey.startToChooseFilesIPCKey}
           fileChooseCompleteIPCKey={ipcChannelKey.fileChooseCompleteIPCKey}
         />
+        <FileListAreaWrapperContainer />
       </AlignLeftDiv>
     </MiddleDivWrapper>
   );
