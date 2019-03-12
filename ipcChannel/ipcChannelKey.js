@@ -7,4 +7,6 @@ module.exports =
 
   startToChooseFilesIPCKey: 'startToChooseFilesIPCKey',
   fileChooseCompleteIPCKey: 'fileChooseCompleteIPCKey',
+
+  packTheseFiles: 'packTheseFiles',
 }

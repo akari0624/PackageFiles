@@ -64,6 +64,18 @@ function createWindow() {
     );
   });
 
+
+  ipcMain.on(ipcChannelKey.packTheseFiles, (evt:Event, theObj:any) => {
+    console.log(`:${ipcChannelKey.packTheseFiles}`)
+
+    console.log(theObj.selectedFilesPath)
+
+    console.log(theObj.sourceDirRootPath)
+
+    console.log(theObj.distDirRootPath)
+    console.log('let do nodejs fs work~')
+  });
+
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
