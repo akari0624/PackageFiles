@@ -3,10 +3,11 @@ import {connect} from 'react-redux'
 import { Dispatch, bindActionCreators } from 'redux'
 import {WholeStateInRedux} from '../../reducers'
 import { updateFilesPaths } from '../actions'
+import  { IPCKeys } from '../../../../electron_side/src/ipcChannel/ipcChannelKey'
 const { ipcRenderer } = window.require('electron')
 
 interface OwnProps {
-  electronIPC_operationKey: string,
+  electronIPC_operationKey: IPCKeys,
   returnWhatYouWantTosendToElectron:(wState: WholeStateInRedux) => any
 }
 

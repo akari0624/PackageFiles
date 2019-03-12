@@ -6,6 +6,7 @@ import {FileRootPathState, PathModifierAction } from '../../reducers/__reducers/
 import { FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
 import {WholeStateInRedux} from '../../reducers'
 import {updateSourceFileRootPath, updateDistFileRootPath, resetFilesPaths} from '../actions'
+import  { IPCKeys } from '../../../../electron_side/src/ipcChannel/ipcChannelKey'
 
 let electron = window.require('electron');
 let { ipcRenderer } = electron;
@@ -34,8 +35,8 @@ interface PropsFromUpperLevel {
   toDoWhat: string
   btnText: string
   pathType: PathType,
-  needToChooseRootDirectoryIPCKey: string,
-  rootDirectoryChoosedIPCKey: string,
+  needToChooseRootDirectoryIPCKey: IPCKeys,
+  rootDirectoryChoosedIPCKey: IPCKeys,
 }
 
 interface PropsFromRedux {

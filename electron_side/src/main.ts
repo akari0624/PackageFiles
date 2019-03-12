@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain, dialog, Event } from 'electron';
-import ipcChannelKey from '../../ipcChannel/ipcChannelKey';
+import { IPCKeys } from './ipcChannel/ipcChannelKey';
 
 let win:BrowserWindow;
 
@@ -14,7 +14,7 @@ function createWindow() {
 
   // win.webContents.openDevTools()
 
-  ipcMain.on(ipcChannelKey.needToChoosesourceRootDictory, (evt:Event, data:string) => {
+  ipcMain.on(IPCKeys.needToChoosesourceRootDictory, (evt:Event, data:string) => {
     console.log(`receive data from client: ${data}`);
     dialog.showOpenDialog(
       win,
@@ -24,14 +24,14 @@ function createWindow() {
         filePaths => {
         console.log(filePaths);
         win.webContents.send(
-          ipcChannelKey.sourceRootDictoryChoosed,
+          IPCKeys.sourceRootDictoryChoosed,
           filePaths
         );
       }
     );
   });
 
-  ipcMain.on(ipcChannelKey.needToChooseRootDistDictory, (evt:Event, data:string) => {
+  ipcMain.on(IPCKeys.needToChooseRootDistDictory, (evt:Event, data:string) => {
     console.log(`receive data from client: ${data}`);
     dialog.showOpenDialog(
       win,
@@ -40,13 +40,13 @@ function createWindow() {
       },
       filePaths => {
         console.log(filePaths);
-        win.webContents.send(ipcChannelKey.distRootDictoryChoosed, filePaths);
+        win.webContents.send(IPCKeys.distRootDictoryChoosed, filePaths);
       }
     );
   });
 
   // 一定要記住 ipcMain.on的callback裡 第一個參數是event,第二個參數開始才是client side傳過來的資料
-  ipcMain.on(ipcChannelKey.startToChooseFilesIPCKey, (evt:Event, sourceDictPath:string) => {
+  ipcMain.on(IPCKeys.startToChooseFilesIPCKey, (evt:Event, sourceDictPath:string) => {
     console.log(`path:${sourceDictPath}`);
     dialog.showOpenDialog(
       win,
@@ -57,7 +57,7 @@ function createWindow() {
       filePaths => {
         console.log(filePaths);
         win.webContents.send(
-          ipcChannelKey.fileChooseCompleteIPCKey,
+          IPCKeys.fileChooseCompleteIPCKey,
           filePaths
         );
       }
@@ -65,8 +65,8 @@ function createWindow() {
   });
 
 
-  ipcMain.on(ipcChannelKey.packTheseFiles, (evt:Event, theObj:any) => {
-    console.log(`:${ipcChannelKey.packTheseFiles}`)
+  ipcMain.on(IPCKeys.packTheseFiles, (evt:Event, theObj:any) => {
+    console.log(`:${IPCKeys.packTheseFiles}`)
 
     console.log(theObj.selectedFilesPath)
 

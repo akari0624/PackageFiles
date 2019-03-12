@@ -10,6 +10,7 @@ import {WholeStateInRedux} from '../../reducers'
 import {updateSourceFileRootPath, updateDistFileRootPath, appendFilesPath} from '../actions'
 
 import { tranAbsoluteFilePathToRelativePathAggratedString } from '../__util_function'
+import  { IPCKeys } from '../../../../electron_side/src/ipcChannel/ipcChannelKey'
 
 let electron = window.require('electron');
 let { ipcRenderer } = electron;
@@ -26,8 +27,8 @@ export enum PathType {
 interface PropsFromUpperLevel {
   toDoWhat: string
   btnText: string
-  startToChooseFilesIPCKey: string
-  fileChooseCompleteIPCKey: string
+  startToChooseFilesIPCKey: IPCKeys
+  fileChooseCompleteIPCKey: IPCKeys
 }
 
 interface PropsFromRedux {
