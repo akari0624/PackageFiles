@@ -11,7 +11,7 @@ import { Dispatch, bindActionCreators } from 'redux'
 import {FileRootPathState, PathModifierAction } from '../../reducers/__reducers/rootPathReducer'
 import {FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
 import {WholeStateInRedux} from '../../reducers'
-import {updateSourceFileRootPath, updateDistFileRootPath, updateFilesPath} from '../actions'
+import {updateSourceFileRootPath, updateDistFileRootPath, appendFilesPath} from '../actions'
 
 import { tranAbsoluteFilePathToRelativePathAggratedString } from '../__util_function'
 
@@ -41,7 +41,7 @@ interface PropsFromRedux {
 interface DispatchProps {
   updateSourceFileRootPath: (arg0:string) => PathModifierAction
   updateDistFileRootPath: (arg0: string) => PathModifierAction
-  updateFilesPath: (filesPathStr: string) => FilesPathModifierAction
+  appendFilesPath: (filesPathStr: string) => FilesPathModifierAction
 }
 
 type Props = PropsFromUpperLevel & DispatchProps & PropsFromRedux
@@ -82,7 +82,7 @@ class FileChooserInputBtPair extends Component<Props, State> {
       console.log(`choosed files:`)
       console.log(msg)
       const sourceFilesRootPath = this.props.fileRoot.sourceFilesRootPath
-      this.props.updateFilesPath(
+      this.props.appendFilesPath(
         tranAbsoluteFilePathToRelativePathAggratedString(
           msg, sourceFilesRootPath,
         )
@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => (
     {
       updateSourceFileRootPath,
       updateDistFileRootPath,
-      updateFilesPath,
+      appendFilesPath,
     },
     dispatch,
   )

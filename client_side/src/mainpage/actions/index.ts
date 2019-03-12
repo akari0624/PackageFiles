@@ -16,9 +16,9 @@ export const updateDistFileRootPath = (path: string):PathModifierAction => {
   }
 }
 
-export const updateFilesPath = (paths: string):FilesPathModifierAction => {
+export const appendFilesPath = (paths: string):FilesPathModifierAction => {
   return {
-    type: FilesPathType.setFilesPath,
+    type: FilesPathType.appendFilesPath,
     payload: paths,
   }
 }

@@ -18,8 +18,8 @@ const FilesPathReducer : Reducer<FilesPath, FilesPathModifierAction> =
   (state : FilesPath = defaultState,
    action : FilesPathModifierAction):FilesPath => {
     switch (action.type) {
-      case FilesPathType.setFilesPath:
-        return {filePaths: action.payload}
+      case FilesPathType.appendFilesPath:
+        return {filePaths: state.filePaths + action.payload}
       case FilesPathType.getFilesPath:
         return state
     }

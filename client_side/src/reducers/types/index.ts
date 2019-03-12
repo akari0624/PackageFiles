@@ -7,6 +7,6 @@ export enum RootPathType {
 
 
 export enum FilesPathType {
-    setFilesPath = 'setFilesPath',
+    appendFilesPath = 'appendFilesPath',
     getFilesPath = 'getFilesPath',
 }
