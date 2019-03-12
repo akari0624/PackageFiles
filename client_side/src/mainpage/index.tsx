@@ -7,6 +7,7 @@ import FunctionalButtonWrapper from './container/FunctionalButtonWrapper'
 
 import  { IPCKeys }  from  '../../../electron_side/src/ipcChannel/ipcChannelKey'
 import { WholeStateInRedux } from '../reducers/index'
+import OnPackFileDataFromClient from '../../../electron_side/src/models/data_types/onPackFileDataFromClient'
 
 /** in Typescript, we need to write a interface(I feel more like a protocol) to the incoming props
  *  so tsc(TypeScript Compiler) can help us check the type in compile time
@@ -39,16 +40,15 @@ const AlignLeftDiv = Styled.div`
  `
 
 
-function sendToElectronWhenPackFileClicked(wState: WholeStateInRedux): any{
+function sendToElectronWhenPackFileClicked(wState: WholeStateInRedux): OnPackFileDataFromClient{
 
   const { fileRoot, selectedFilesPath} = wState;
-  return {
-    selectedFilesPath: selectedFilesPath.filePaths,
-    sourceDirRootPath: fileRoot.sourceFilesRootPath,
-    distDirRootPath: fileRoot.distFileRootPath,
-  }
+  return new OnPackFileDataFromClient(
+           selectedFilesPath.filePaths,
+           fileRoot.sourceFilesRootPath,
+           fileRoot.distFileRootPath,
+        )
 }
-
 
 export default (props: Props) => {
   return (
@@ -79,9 +79,10 @@ export default (props: Props) => {
       </AlignLeftDiv>
     </MiddleDivWrapper>
     <RightSideBtnArea>
-       <FunctionalButtonWrapper 
+       <FunctionalButtonWrapper
         electronIPC_operationKey={IPCKeys.packTheseFiles}
-        returnWhatYouWantTosendToElectron={sendToElectronWhenPackFileClicked}>
+        returnWhatYouWantTosendToElectron={sendToElectronWhenPackFileClicked}
+       >
            <button>打包檔案</button>
        </FunctionalButtonWrapper>
     </RightSideBtnArea>

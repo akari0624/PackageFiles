@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain, dialog, Event } from 'electron';
 import { IPCKeys } from './ipcChannel/ipcChannelKey';
-
+import IPCHandlers from './ipcHandlers'
 let win:BrowserWindow;
 
 
@@ -65,16 +65,7 @@ function createWindow() {
   });
 
 
-  ipcMain.on(IPCKeys.packTheseFiles, (evt:Event, theObj:any) => {
-    console.log(`:${IPCKeys.packTheseFiles}`)
-
-    console.log(theObj.selectedFilesPath)
-
-    console.log(theObj.sourceDirRootPath)
-
-    console.log(theObj.distDirRootPath)
-    console.log('let do nodejs fs work~')
-  });
+  ipcMain.on(IPCKeys.packTheseFiles, IPCHandlers.doFilesPack);
 
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
