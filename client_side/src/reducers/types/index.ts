@@ -1,12 +1,12 @@
 export enum RootPathType {
-    setSourceFilesRootPath,
-    setDistFileRootPath,
-    getSourceFilesRootPath,
-    getDistFileRootPath,
+    setSourceFilesRootPath = 'setSourceFilesRootPath',
+    setDistFileRootPath = 'setDistFileRootPath',
+    getSourceFilesRootPath = 'getSourceFilesRootPath',
+    getDistFileRootPath = 'getDistFileRootPath',
 }
 
 
 export enum FilesPathType {
-    setFilesPath,
-    getFilesPath,
+    setFilesPath = 'setFilesPath',
+    getFilesPath = 'getFilesPath',
 }
