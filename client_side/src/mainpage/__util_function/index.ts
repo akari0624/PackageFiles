@@ -1,8 +1,8 @@
 export const tranAbsoluteFilePathToRelativePathAggratedString =
  (fileList : string[], fileSourceRootPath : string) => {
+   const rootPathStrLength = fileSourceRootPath.length
    const reducer = (accStr : string, currPath : string) => {
-     const startIndex = currPath.indexOf(fileSourceRootPath)
-     const subPath = currPath.substring(startIndex, currPath.length)
+     const subPath = currPath.substring(rootPathStrLength, currPath.length)
      accStr += `${subPath}\r\n`
      return accStr
    }
