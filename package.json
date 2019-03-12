@@ -6,14 +6,15 @@
   "repository": "https://github.com/akari0624/react-starter_withTypeScript",
   "scripts": {
     "watchElectronSide": "webpack --watch --config ./webpack_config/webpack.config.electron.js --mode development",
-    "dev": "webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.js --mode development | npm run watchElectronSide",
+    "runElectron": "electron .",
+
+    "dev": "webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.js --mode development",
     "devWithBabel": "NODE_ENV=withBabel webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.js --mode development | npm run watchElectronSide",
     "fastbuild_dev": "webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.fastbuild.js --mode development | npm run watchElectronSide",
     "fastbuild_devWithBabel": "NODE_ENV=withBabel webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.fastbuild.js --mode development | npm run watchElectronSide",
     "dist": "npm run clean && webpack --config ./webpack_config/webpack.config.prod.js --progress --bail --env dist -p",
     "distWithBabel": "NODE_ENV=withBabel npm run clean && webpack --config ./webpack_config/webpack.config.prod.js --progress --bail --env dist -p",
-    "clean": "rimraf dist/*",
-    "runElectron": "electron ."
+    "clean": "rimraf dist/*"
   },
   "author": "",
   "license": "ISC",
