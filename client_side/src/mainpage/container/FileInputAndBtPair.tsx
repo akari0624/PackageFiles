@@ -8,9 +8,10 @@ import React, { Component } from 'react'
 import Styled from 'styled-components'
 import {connect} from 'react-redux'
 import { Dispatch, bindActionCreators } from 'redux'
-import {FileRootPathState, PathModifierAction} from '../../reducers/__reducers/rootPathReducer'
+import {FileRootPathState, PathModifierAction } from '../../reducers/__reducers/rootPathReducer'
+import { FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
 import {WholeStateInRedux} from '../../reducers'
-import {updateSourceFileRootPath, updateDistFileRootPath} from '../actions'
+import {updateSourceFileRootPath, updateDistFileRootPath, resetFilesPaths} from '../actions'
 
 let electron = window.require('electron');
 let { ipcRenderer } = electron;
@@ -39,6 +40,8 @@ interface PropsFromRedux {
 interface DispatchProps {
   updateSourceFileRootPath: (arg0:string) => PathModifierAction
   updateDistFileRootPath: (arg0: string) => PathModifierAction
+  resetFilesPaths: () => FilesPathModifierAction
+
 }
 
 type Props = PropsFromUpperLevel & DispatchProps & PropsFromRedux
@@ -70,6 +73,7 @@ class FileInputAndBtPair extends Component<Props, State> {
   handleDirectoryPathChanged = (e: React.FormEvent<HTMLInputElement>) => {
     if (this.props.pathType === PathType.sourceRoot) {
       this.props.updateSourceFileRootPath(e.currentTarget.value)
+
     }else if (this.props.pathType === PathType.distRoot) {
       this.props.updateDistFileRootPath(e.currentTarget.value)
     }
@@ -97,6 +101,14 @@ class FileInputAndBtPair extends Component<Props, State> {
   componentDidMount() {
     ipcRenderer.on(this.props.rootDirectoryChoosedIPCKey, (event: any, msg: string[]) => {
       if (this.props.pathType === PathType.sourceRoot) {
+
+        /* if change sourcePath, and the changedRootPath is not the same 
+        as lastRootFilePath, clear all selected filesPath
+        */
+        const originSourceRootPath = this.props.fileRootPath
+        if(msg[0] !== originSourceRootPath){
+          this.props.resetFilesPaths()
+        }
         this.props.updateSourceFileRootPath(msg[0])
       }else if (this.props.pathType === PathType.distRoot) {
         this.props.updateDistFileRootPath(msg[0])
@@ -124,6 +136,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => (
     {
       updateSourceFileRootPath,
       updateDistFileRootPath,
+      resetFilesPaths,
     },
     dispatch,
   )

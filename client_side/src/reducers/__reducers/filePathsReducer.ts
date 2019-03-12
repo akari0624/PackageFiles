@@ -14,6 +14,10 @@ const defaultState : FilesPath = {
   filePaths: '',
 }
 
+const resetedState : FilesPath = {
+  filePaths: '',
+}
+
 const FilesPathReducer : Reducer<FilesPath, FilesPathModifierAction> =
   (state : FilesPath = defaultState,
    action : FilesPathModifierAction):FilesPath => {
@@ -22,6 +26,8 @@ const FilesPathReducer : Reducer<FilesPath, FilesPathModifierAction> =
         return {filePaths: state.filePaths + action.payload}
       case FilesPathType.getFilesPath:
         return state
+      case FilesPathType.resetFilesPath:
+        return  resetedState
     }
 
     return state

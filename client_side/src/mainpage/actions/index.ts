@@ -22,3 +22,11 @@ export const appendFilesPath = (paths: string):FilesPathModifierAction => {
     payload: paths,
   }
 }
+
+
+export const resetFilesPaths = ():FilesPathModifierAction => {
+  return {
+    type: FilesPathType.resetFilesPath,
+    payload: '',
+  }
+}
