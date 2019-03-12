@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import reducers from './reducers'
 
 import indexRouter from './mainpage'
+import GlobalWindowDeclaration from './GlobalWindowDeclaration'
 
 
 const createStoreWithMiddleware = applyMiddleware()(createStore)

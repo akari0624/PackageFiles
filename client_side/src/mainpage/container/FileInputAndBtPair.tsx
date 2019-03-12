@@ -1,9 +1,3 @@
-declare global {
-  interface Window {
-    require: any;
-  }
-}
-
 import React, { Component } from 'react'
 import Styled from 'styled-components'
 import {connect} from 'react-redux'
@@ -16,9 +10,20 @@ import {updateSourceFileRootPath, updateDistFileRootPath, resetFilesPaths} from 
 let electron = window.require('electron');
 let { ipcRenderer } = electron;
 
-const FilePathInput = Styled.input`
-  width:300px;
+
+
+const FixedWidthLabel = Styled.label`
+  width: 30%;
 `
+
+const FilePathInput = Styled.input`
+  width: 60%;
+`
+
+const FixedWidthButton = Styled.button`
+  width: 10%;
+`
+
 
 export enum PathType {
   sourceRoot,
@@ -48,6 +53,8 @@ type Props = PropsFromUpperLevel & DispatchProps & PropsFromRedux
 
 interface State {
 }
+
+
 
 class FileInputAndBtPair extends Component<Props, State> {
   constructor(props: Props) {
@@ -85,15 +92,15 @@ class FileInputAndBtPair extends Component<Props, State> {
   render() {
     return (
       <div>
-        <label>{this.props.toDoWhat}</label>
+        <FixedWidthLabel>{this.props.toDoWhat}</FixedWidthLabel>
         <FilePathInput
           type="text"
           value={this.props.fileRootPath}
           onChange={this.handleDirectoryPathChanged}
         />
-        <button type="button" onClick={this.handleOnDirectorySelected}>
+        <FixedWidthButton type="button" onClick={this.handleOnDirectorySelected}>
           {this.props.btnText}
-        </button>
+        </FixedWidthButton>
       </div>
     );
   }

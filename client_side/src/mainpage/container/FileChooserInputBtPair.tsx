@@ -1,8 +1,4 @@
-declare global {
-  interface Window {
-    require: any;
-  }
-}
+
 
 import React, { Component } from 'react'
 import Styled from 'styled-components'
