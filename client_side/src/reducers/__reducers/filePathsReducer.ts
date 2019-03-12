@@ -28,6 +28,8 @@ const FilesPathReducer : Reducer<FilesPath, FilesPathModifierAction> =
         return state
       case FilesPathType.resetFilesPath:
         return  resetedState
+      case FilesPathType.updateFilesPaths:
+        return  {filePaths: action.payload }
     }
 
     return state

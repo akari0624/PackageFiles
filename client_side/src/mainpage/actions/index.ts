@@ -30,3 +30,10 @@ export const resetFilesPaths = ():FilesPathModifierAction => {
     payload: '',
   }
 }
+
+export const updateFilesPaths = (pathsStr: string):FilesPathModifierAction => {
+  return {
+    type: FilesPathType.updateFilesPaths,
+    payload: pathsStr,
+  }
+}

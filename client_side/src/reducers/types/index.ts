@@ -10,4 +10,5 @@ export enum FilesPathType {
     appendFilesPath = 'appendFilesPath',
     resetFilesPath = 'resetFilesPath',
     getFilesPath = 'getFilesPath',
+    updateFilesPaths = 'updateFilesPaths',
 }
