@@ -1,9 +1,10 @@
 import { app, BrowserWindow, ipcMain, dialog, Event } from 'electron';
 import { IPCKeys } from './ipcChannel/ipcChannelKey';
 import IPCHandlers from './ipcHandlers'
-let win:BrowserWindow;
+import OnPackFileDataFromClient from './models/data_types/onPackFileDataFromClient';
+import { array } from 'prop-types';
 
-
+let win:BrowserWindow
 
 function createWindow() {
   // Create the browser window.
@@ -65,7 +66,14 @@ function createWindow() {
   });
 
 
-  ipcMain.on(IPCKeys.packTheseFiles, IPCHandlers.doFilesPack);
+  ipcMain.on(IPCKeys.packTheseFiles, (evt:Event, theObj: OnPackFileDataFromClient) => {
+
+    IPCHandlers.doFilesPack(theObj)
+      .then(result => result.forEach(s => console.log(s)))
+      .catch(err => console.log(err))
+
+  }
+ );
 
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
