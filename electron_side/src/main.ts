@@ -2,7 +2,8 @@ import { app, BrowserWindow, ipcMain, dialog, Event } from 'electron';
 import { IPCKeys } from './ipcChannel/ipcChannelKey';
 import IPCHandlers from './ipcHandlers'
 import OnPackFileDataFromClient from './models/data_types/onPackFileDataFromClient';
-import { array } from 'prop-types';
+import OnPackedFilesFinishedData from './models/data_types/onPackedFilesFinishedData';
+
 
 let win:BrowserWindow
 
@@ -69,8 +70,8 @@ function createWindow() {
   ipcMain.on(IPCKeys.packTheseFiles, (evt:Event, theObj: OnPackFileDataFromClient) => {
 
     IPCHandlers.doFilesPack(theObj)
-      .then(result => result.forEach(s => console.log(s)))
-      .catch(err => console.log(err))
+      .then(result =>  win.webContents.send(IPCKeys.afterPackFilesFinished, new OnPackedFilesFinishedData(result, '')))
+      .catch((err: any) => win.webContents.send(IPCKeys.afterPackFilesFinished, new OnPackedFilesFinishedData([], err.message)))
 
   }
  );

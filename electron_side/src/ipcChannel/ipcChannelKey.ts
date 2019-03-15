@@ -9,4 +9,5 @@ export enum IPCKeys
   fileChooseCompleteIPCKey = 'fileChooseCompleteIPCKey',
 
   packTheseFiles = 'packTheseFiles',
+  afterPackFilesFinished = 'afterPackFilesFinished',
 }

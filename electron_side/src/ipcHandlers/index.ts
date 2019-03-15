@@ -10,8 +10,11 @@ import {
   isDirsExistSync,
   mkDirTillLastFolderSync,
 } from './models';
+import PromiseUtil from '../utils'
 
 const copyFilePromisifyly = promisify(copyFile);
+
+
 
 const IPCHandlers = {
   doFilesPack: async (theObj: OnPackFileDataFromClient): Promise<string[]> => {
@@ -19,43 +22,36 @@ const IPCHandlers = {
 
     const removeLastEmptyString = splitTheTextsByLineBreak(selectedFilesPath);
 
-    let processMsg: string[] = [];
-    await removeLastEmptyString.forEach(async f => {
+    const processMsgP = await removeLastEmptyString.map(async f => {
       try {
         const copyFileDestinationPath = `${distDirRootPath}${f}`;
         const beforeFile_path = deductFileNameInThisPath(
-          copyFileDestinationPath,
+          copyFileDestinationPath
         );
         const isDirExit = await isDirsExist(beforeFile_path);
         if (!isDirExit) {
           const isCreateSuccess = await mkDirTillLastFolder(beforeFile_path);
         }
 
-        copyFilePromisifyly(
+        await copyFilePromisifyly(
           `${sourceDirRootPath}${f}`,
           `${distDirRootPath}${f}`
-        )
-          .then(() => {
-            processMsg.push(
-              `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`,
-            );
-            console.log(
-              `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`,
-            );
-          })
-          .catch(err => {
-            processMsg.push(
-              `handle copy file ${sourceDirRootPath}${f} occured error : ${err}`,
-            );
-            console.log(
-              `handle copy file ${sourceDirRootPath}${f} occured error : ${err}`,
-            );
-          });
+        );
+
+        console.log(
+          `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`
+        );
+        return `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`;
       } catch (err) {
-        console.log(`error occured while copied file: ${err.message}`);
+        console.log(
+          `handle copy file ${sourceDirRootPath}${f} occured error : ${err}`
+        );
+
+        return `handle copy file ${sourceDirRootPath}${f} occured error : ${err}`;
       }
     });
-    return processMsg;
+
+    return PromiseUtil.waitTillAllFinished<string>(processMsgP);
   },
   doFilesPackSync: (theObj: OnPackFileDataFromClient): string[] => {
     const { selectedFilesPath, sourceDirRootPath, distDirRootPath } = theObj;
@@ -66,7 +62,7 @@ const IPCHandlers = {
       try {
         const copyFileDestinationPath = `${distDirRootPath}${f}`;
         const beforeFile_path = deductFileNameInThisPath(
-          copyFileDestinationPath,
+          copyFileDestinationPath
         );
         const isDirExit = isDirsExistSync(beforeFile_path);
         console.log(`isDirExit ${isDirExit}`);
@@ -77,10 +73,10 @@ const IPCHandlers = {
 
         copyFileSync(`${sourceDirRootPath}${f}`, `${distDirRootPath}${f}`);
         processMsg.push(
-          `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`,
+          `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`
         );
         console.log(
-          `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`,
+          `copy file from ${sourceDirRootPath}${f} to ${distDirRootPath}${f}`
         );
       } catch (err) {
         processMsg.push(`error occured while copied file: ${err.message}`);
