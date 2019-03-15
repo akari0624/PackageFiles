@@ -3,9 +3,11 @@ import {connect} from 'react-redux'
 import { Dispatch, bindActionCreators } from 'redux'
 import {WholeStateInRedux} from '../../reducers'
 import FileListArea from '../components/FileListArea'
-import { updateFilesPaths } from '../actions'
+import mainPageActions from '../actions'
 import { FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
 
+
+const { updateFilesPaths } = mainPageActions
 interface OwnProps {
 
 }

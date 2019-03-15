@@ -7,10 +7,13 @@ import { Dispatch, bindActionCreators } from 'redux'
 import {FileRootPathState, PathModifierAction } from '../../reducers/__reducers/rootPathReducer'
 import {FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
 import {WholeStateInRedux} from '../../reducers'
-import {updateSourceFileRootPath, updateDistFileRootPath, appendFilesPath} from '../actions'
+import mainPageDispatchActions from '../actions'
 
 import { tranAbsoluteFilePathToRelativePathAggratedString } from '../__util_function'
 import  { IPCKeys } from '../../../../electron_side/src/ipcChannel/ipcChannelKey'
+
+
+const {updateSourceFileRootPath, updateDistFileRootPath, appendFilesPath} = mainPageDispatchActions
 
 let electron = window.require('electron');
 let { ipcRenderer } = electron;

@@ -5,9 +5,10 @@ import { Dispatch, bindActionCreators } from 'redux'
 import {FileRootPathState, PathModifierAction } from '../../reducers/__reducers/rootPathReducer'
 import { FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
 import {WholeStateInRedux} from '../../reducers'
-import {updateSourceFileRootPath, updateDistFileRootPath, resetFilesPaths} from '../actions'
+import mainPageDispatchActions from '../actions'
 import  { IPCKeys } from '../../../../electron_side/src/ipcChannel/ipcChannelKey'
 
+const {updateSourceFileRootPath, updateDistFileRootPath, resetFilesPaths} = mainPageDispatchActions
 let electron = window.require('electron');
 let { ipcRenderer } = electron;
 
@@ -61,17 +62,6 @@ class FileInputAndBtPair extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
   }
-
-  // handleOnDirectorySelected = (evt: React.FormEvent<HTMLInputElement>) => {
-
-  //    const fileList = evt.currentTarget.files
-  //    console.log(fileList)
-  //    this.setState((prevState, props)=>{
-  //      return {
-  //       pickedDirectoryPath:fileList[0]
-  //      }
-  //    })
-  // }
 
   handleOnDirectorySelected = () => {
     //呼叫electron

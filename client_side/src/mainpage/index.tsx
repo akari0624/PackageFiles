@@ -8,6 +8,9 @@ import FunctionalButtonWrapper from './container/FunctionalButtonWrapper'
 import  { IPCKeys }  from  '../../../electron_side/src/ipcChannel/ipcChannelKey'
 import { WholeStateInRedux } from '../reducers/index'
 import OnPackFileDataFromClient from '../../../electron_side/src/models/data_types/onPackFileDataFromClient'
+import { MainPageDispatchActions } from './actions'
+
+import OnPackedFilesFinishedData from '../../../electron_side/src/models/data_types/onPackedFilesFinishedData'
 
 /** in Typescript, we need to write a interface(I feel more like a protocol) to the incoming props
  *  so tsc(TypeScript Compiler) can help us check the type in compile time
@@ -50,6 +53,17 @@ function sendToElectronWhenPackFileClicked(wState: WholeStateInRedux): OnPackFil
         )
 }
 
+const whenIPCEventCome = (evt: any, data: any, dispatchProps: MainPageDispatchActions) => {
+    const tData:OnPackedFilesFinishedData = data
+     console.log('first')
+     console.log(data)
+    if(tData.errorMsg != ''){
+       alert(tData.errorMsg)
+     }else{
+       alert(tData.handleMessages)
+     }
+}
+
 export default (props: Props) => {
   return (
     <FlexWrapperMain>
@@ -82,6 +96,8 @@ export default (props: Props) => {
        <FunctionalButtonWrapper
         electronIPC_operationKey={IPCKeys.packTheseFiles}
         returnWhatYouWantTosendToElectron={sendToElectronWhenPackFileClicked}
+        receiveIpcEventName={IPCKeys.afterPackFilesFinished}
+        reservedReceiveEventFromElectron={whenIPCEventCome}
        >
            <button>打包檔案</button>
        </FunctionalButtonWrapper>

@@ -1,4 +1,4 @@
-export default class OnPackFileDataFromClient{
+export default class OnPackFileDataFromClient {
 
   readonly selectedFilesPath: string
   readonly sourceDirRootPath: string
