@@ -2,6 +2,7 @@ import React, { Component, ReactElement } from 'react'
 import Styled from 'styled-components'
 import { connect } from 'react-redux'
 import {WholeStateInRedux} from '../../reducers'
+import { FilePackFinishedMsgState } from '../../reducers/__reducers/filePackFinishedMSgReducer'
 
 const WrapperWindowWhenHidded = Styled.div`
   position: absolute;
@@ -47,12 +48,9 @@ interface OwnProps {
 
 interface DispatchProps {}
 
-interface FilePackFinishedMsg {
-  fMsg: string
-}
 
 interface AppStateProps {
-  filePackFinishedMsg: FilePackFinishedMsg
+  filePackFinishedMsg: FilePackFinishedMsgState
 }
 
 type MergedPropsType = AppStateProps & DispatchProps & OwnProps
