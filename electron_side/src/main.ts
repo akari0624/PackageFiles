@@ -90,9 +90,17 @@ function createWindow() {
     // when you should delete the corresponding element.
     win = null;
   });
+
+
+  if (process.env.NODE_ENV.indexOf('Production') === -1) {
+    require('devtron').install()
+  }
+  
 }
 
 app.on('ready', createWindow);
+
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

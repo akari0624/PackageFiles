@@ -12,8 +12,8 @@
     "devWithBabel": "NODE_ENV=withBabel webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.js --mode development",
     "fastbuild_dev": "webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.fastbuild.js --mode development",
     "fastbuild_devWithBabel": "NODE_ENV=withBabel webpack-dev-server --public-host --config ./webpack_config/webpack.config.dev.fastbuild.js --mode development",
-    "dist": "npm run clean && webpack --config ./webpack_config/webpack.config.prod.js --progress --bail --env dist -p",
-    "distWithBabel": "NODE_ENV=withBabel npm run clean && webpack --config ./webpack_config/webpack.config.prod.js --progress --bail --env dist -p",
+    "dist": "NODE_ENV=Production npm run clean && webpack --config ./webpack_config/webpack.config.prod.js --progress --bail --env dist -p",
+    "distWithBabel": "NODE_ENV=withBabelProduction npm run clean && webpack --config ./webpack_config/webpack.config.prod.js --progress --bail --env dist -p",
     "clean": "rimraf dist/*",
     "test": "mocha --require ts-node/register  'client_side/test/**/*.{ts,tsx}' && mocha --require ts-node/register  'electron_side/tests/**/*.{ts,tsx}'"
   },
@@ -59,6 +59,7 @@
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
     "css-loader": "^0.28.10",
+    "devtron": "^1.4.0",
     "electron": "^4.0.8",
     "electron-typescript-definitions": "^8.2.1",
     "eslint": "^4.19.1",

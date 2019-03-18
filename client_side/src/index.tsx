@@ -13,7 +13,7 @@ const createStoreWithMiddleware = applyMiddleware()(createStore)
 
 let appStore: Store<WholeStateInRedux, AnyAction>;
 
-if(process.env.NODE_ENV === 'production') {
+if(process.env.NODE_ENV.indexOf('Production') === -1) {
 
   appStore = createStoreWithMiddleware(reducers)
 
