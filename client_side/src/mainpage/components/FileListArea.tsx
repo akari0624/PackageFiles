@@ -7,8 +7,8 @@ interface Props {
 }
 
 const FileListDiv = Styled.div `
-  width: 70%;
-  height:600px;
+  width: 100%;
+  height: 100%;
 `
 
 const FileListTextArea = Styled.textarea `
@@ -16,6 +16,7 @@ const FileListTextArea = Styled.textarea `
   height: 100%;
   text-align: left;
   size: 13px;
+  resize: none;
 `
 
 

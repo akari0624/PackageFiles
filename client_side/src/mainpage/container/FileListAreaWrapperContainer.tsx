@@ -38,9 +38,7 @@ class FileListAreaWrapperContainer extends Component<MergedProps> {
 
     const { selectedFilesPath } = this.props
     return (
-      <div>
         <FileListArea fileList={selectedFilesPath} handleTextInputChange={this.handleOnTextAreaChange} />
-      </div>
     )
   }
 }
