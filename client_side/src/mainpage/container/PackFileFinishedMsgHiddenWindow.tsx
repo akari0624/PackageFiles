@@ -47,8 +47,12 @@ interface OwnProps {
 
 interface DispatchProps {}
 
-interface AppStateProps {
+interface FilePackFinishedMsg {
   fMsg: string
+}
+
+interface AppStateProps {
+  filePackFinishedMsg: FilePackFinishedMsg
 }
 
 type MergedPropsType = AppStateProps & DispatchProps & OwnProps
@@ -75,10 +79,10 @@ class PackFileFinishedMsgHiddenWindow extends Component<MergedPropsType, State> 
 
   static getDerivedStateFromProps(nextProps: MergedPropsType, prevState: State): State {
      
-      if(nextProps.fMsg !== '' && prevState.isShow === true){
+      if(nextProps.filePackFinishedMsg.fMsg !== '' && prevState.isShow === true){
         return {
          isShow: false,
-       }}else if(nextProps.fMsg !== '') {
+       }}else if(nextProps.filePackFinishedMsg.fMsg !== '') {
        return {
          isShow: true,
        }
@@ -96,7 +100,7 @@ class PackFileFinishedMsgHiddenWindow extends Component<MergedPropsType, State> 
             <CloseButton>X</CloseButton>
           </CloseButtonWrapper>
            <div>
-             {this.props.fMsg}
+             {this.props.filePackFinishedMsg.fMsg}
            </div>
         </WrapperWindowWhenHidded>
       )
@@ -108,7 +112,7 @@ class PackFileFinishedMsgHiddenWindow extends Component<MergedPropsType, State> 
           <CloseButton>X</CloseButton>
         </CloseButtonWrapper>
          <div>
-           {this.props.fMsg}
+           {this.props.filePackFinishedMsg.fMsg}
          </div>
     </WrapperWindowWhenShowed>
     )
@@ -119,7 +123,7 @@ class PackFileFinishedMsgHiddenWindow extends Component<MergedPropsType, State> 
 
 function mapStateToProps(state: WholeStateInRedux): AppStateProps{
   return {
-    fMsg: state.filePackFinishedMsg.fMsg,
+    filePackFinishedMsg: state.filePackFinishedMsg,
   }
 }
 
