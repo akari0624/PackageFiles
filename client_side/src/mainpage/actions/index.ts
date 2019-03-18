@@ -1,6 +1,7 @@
 import { PathModifierAction } from '../../reducers/__reducers/rootPathReducer'
 import { FilesPathModifierAction } from '../../reducers/__reducers/filePathsReducer'
-import {RootPathType, FilesPathType} from '../../reducers/types'
+import { FilePackFinishedMsgModifierAction } from '../../reducers/__reducers/filePackFinishedMSgReducer'
+import {RootPathType, FilesPathType, FilePackFinishedEventType} from '../../reducers/types'
 
 
 export interface MainPageDispatchActions {
@@ -8,7 +9,8 @@ export interface MainPageDispatchActions {
   updateDistFileRootPath: (path: string) => PathModifierAction,
   appendFilesPath: (paths: string) => FilesPathModifierAction,
   resetFilesPaths: () => FilesPathModifierAction,
-  updateFilesPaths: (pathsStr: string) => FilesPathModifierAction
+  updateFilesPaths: (pathsStr: string) => FilesPathModifierAction,
+  updateAfterFilePackFinishedMsg: (path: string) => FilePackFinishedMsgModifierAction,
 }
 
 const mainPageActions = {
@@ -46,6 +48,13 @@ const mainPageActions = {
     return {
       type: FilesPathType.updateFilesPaths,
       payload: pathsStr,
+    }
+  },
+
+  updateAfterFilePackFinishedMsg: (path: string):FilePackFinishedMsgModifierAction => {
+    return {
+      type: FilePackFinishedEventType.updateFilePackFinishedMsg,
+      payload:path,
     }
   },
 

@@ -73,6 +73,7 @@ const mapActionsToRealProperty = (cProps: MergedProps): MainPageDispatchActions 
     appendFilesPath:  cProps.appendFilesPath,
     resetFilesPaths:  cProps.resetFilesPaths,
     updateFilesPaths:  cProps.updateFilesPaths,
+    updateAfterFilePackFinishedMsg: cProps.updateAfterFilePackFinishedMsg,
  }
 }
 

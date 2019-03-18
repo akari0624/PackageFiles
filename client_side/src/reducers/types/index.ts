@@ -12,3 +12,7 @@ export enum FilesPathType {
     getFilesPath = 'getFilesPath',
     updateFilesPaths = 'updateFilesPaths',
 }
+
+export enum FilePackFinishedEventType {
+    updateFilePackFinishedMsg = 'updateFilePackFinishedMsg',
+}
