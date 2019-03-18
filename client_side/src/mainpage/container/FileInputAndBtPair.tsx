@@ -20,11 +20,24 @@ const FixedWidthLabel = Styled.label`
 
 const FilePathInput = Styled.input`
   width: 60%;
+  margin-left: 10px;
 `
 
 const FixedWidthButton = Styled.button`
-  width: 10%;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+  font-size: 16px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 10px;
 `
+
+
 
 
 export enum PathType {

@@ -20,13 +20,25 @@ const WrapperWindowWhenShowed = Styled.div`
   height: 100vh;
 `
 
-const CloseButton = Styled.a`
-  text-decoration: none;
+const CloseButtonWrapper = Styled.div`
+  transform: translate(97vw, .5vh);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000000;
+  text-align: center;
+  cursor: pointer;
+  background-color: #000000;
+  color: #FFFFFF;
+
+  &:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+  }
 `
 
-const CloseButtonWrapper = Styled.div`
-  border: 1px solid #000000;
-  cursor: pointer;
+const CloseButton = Styled.a`
+  text-decoration: none;
 `
 
 interface OwnProps {
@@ -63,8 +75,6 @@ class PackFileFinishedMsgHiddenWindow extends Component<MergedPropsType, State> 
 
   static getDerivedStateFromProps(nextProps: MergedPropsType, prevState: State): State {
      
-      console.log(`state now`)
-      console.log(prevState)
       if(nextProps.fMsg !== '' && prevState.isShow === true){
         return {
          isShow: false,

@@ -11,7 +11,7 @@ import mainPageDispatchActions from '../actions'
 
 import { tranAbsoluteFilePathToRelativePathAggratedString } from '../__util_function'
 import  { IPCKeys } from '../../../../electron_side/src/ipcChannel/ipcChannelKey'
-
+import OSProperty from '../../infra'
 
 const {updateSourceFileRootPath, updateDistFileRootPath, appendFilesPath} = mainPageDispatchActions
 
@@ -21,6 +21,21 @@ let { ipcRenderer } = electron;
 const FilePathInput = Styled.input`
   width:300px;
 `
+
+const ChooseBtn = Styled.button`
+width: 60px;
+height: 30px;
+text-align: center;
+font-size: 16px;
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+padding: 5px 10px;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+`
+
 
 export enum PathType {
   sourceRoot,
@@ -70,9 +85,9 @@ class FileChooserInputBtPair extends Component<Props, State> {
     return (
       <div>
         <label>{this.props.toDoWhat}</label>
-        <button type="button" onClick={this.handleOnStartToChooseFiles}>
+        <ChooseBtn type="button" onClick={this.handleOnStartToChooseFiles}>
           {this.props.btnText}
-        </button>
+        </ChooseBtn>
       </div>
     );
   }
@@ -84,7 +99,7 @@ class FileChooserInputBtPair extends Component<Props, State> {
       const sourceFilesRootPath = this.props.fileRoot.sourceFilesRootPath
       this.props.appendFilesPath(
         tranAbsoluteFilePathToRelativePathAggratedString(
-          msg, sourceFilesRootPath,
+          msg, sourceFilesRootPath, OSProperty.rowBreaker,
         )
       )
     });
