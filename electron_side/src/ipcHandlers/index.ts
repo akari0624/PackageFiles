@@ -11,7 +11,8 @@ import {
   mkDirTillLastFolderSync,
 } from './models';
 import PromiseUtil from '../utils'
-
+import PlatformInfo from '../models/data_types/platInfoData';
+import { OS_Util } from '../utils'
 const copyFilePromisifyly = promisify(copyFile);
 
 
@@ -83,6 +84,10 @@ const IPCHandlers = {
       }
     });
     return processMsg;
+  },
+
+  getPlatformInfo: (): PlatformInfo => {
+   return new PlatformInfo(process.platform, OS_Util.rowBreaker)
   }
 };
 

@@ -1,6 +1,7 @@
 import { mkdir, stat, Stats, statSync, mkdirSync } from 'fs';
 import { promisify } from 'util';
 import mkdirp from 'mkdirp';
+import { OS_Util } from '../../utils'
 
 const mkdirP_Promisifyly = promisify(mkdirp);
 const statPromisifyly = promisify(stat);
@@ -45,7 +46,7 @@ export const splitTheTextsByLineBreak = (filePaths: string): string[] => {
 
   // unix, mac osx 換行符號是 \n
   // windows 換行符號是 \r\n
-  const filesArr = filePaths.split('\r\n');
+  const filesArr = filePaths.split(OS_Util.rowBreaker);
 
   // 用換行符號切 最後有可能因為最後一行有加上換行符號 造成多一個空字串 所以去除它
   if (filesArr[filesArr.length - 1] === '') {

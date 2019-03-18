@@ -73,8 +73,16 @@ function createWindow() {
       .then(result =>  win.webContents.send(IPCKeys.afterPackFilesFinished, new OnPackedFilesFinishedData(result, '')))
       .catch((err: any) => win.webContents.send(IPCKeys.afterPackFilesFinished, new OnPackedFilesFinishedData([], err.message)))
 
-  }
- );
+  });
+
+  ipcMain.on(IPCKeys.getPlatformInfo, (evt: Event, data: any) => {
+ 
+    win.webContents.send(
+      IPCKeys.platformInfoResponseBack,
+      IPCHandlers.getPlatformInfo()
+    );
+  
+  })
 
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows

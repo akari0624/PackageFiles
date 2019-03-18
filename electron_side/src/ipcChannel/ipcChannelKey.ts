@@ -10,4 +10,6 @@ export enum IPCKeys
 
   packTheseFiles = 'packTheseFiles',
   afterPackFilesFinished = 'afterPackFilesFinished',
+  getPlatformInfo = 'getPlatformInfo',
+  platformInfoResponseBack = 'platformInfoResponseBack',
 }

@@ -12,7 +12,7 @@ import {MainPageDispatchActions} from './actions'
 
 import OnPackedFilesFinishedData from '../../../electron_side/src/models/data_types/onPackedFilesFinishedData'
 import PackFileFinishedMsgHiddenWindow from './container/PackFileFinishedMsgHiddenWindow'
-
+import OSProperty from '../infra'
 /** in Typescript, we need to write a interface(I feel more like a protocol) to the incoming props
  *  so tsc(TypeScript Compiler) can help us check the type in compile time
  *  https://stackoverflow.com/a/49280215/5599652
@@ -38,7 +38,19 @@ const RightSideBtnsWrapper = Styled.div `
    width: 25vw;
    text-align: center;
    height: 100vh;
-   background-color: #000000;
+ `
+
+ const PackFileBtn = Styled.button`
+   width: 100%;
+   height: 40px;
+   text-align: center;
+   font-size: 16px;
+   background-color: #4CAF50; /* Green */
+   border: none;
+   color: white;
+   padding: 15px 32px;
+   text-decoration: none;
+   display: inline-block;
  `
 
 function sendToElectronWhenPackFileClicked(wState : WholeStateInRedux) : OnPackFileDataFromClient {
@@ -57,7 +69,7 @@ const whenIPCEventCome = (evt : any, data : any, dispatchProps : MainPageDispatc
 
     const str = tData
       .handleMessages
-      .reduce((acc, curr) => (acc += `${curr}\n`), '')
+      .reduce((acc, curr) => (acc += `${curr}${OSProperty.rowBreaker}`), '')
     dispatchProps.updateAfterFilePackFinishedMsg(str)
   }
 }
@@ -93,7 +105,7 @@ export default(props : Props) => {
             returnWhatYouWantTosendToElectron={sendToElectronWhenPackFileClicked}
             receiveIpcEventName={IPCKeys.afterPackFilesFinished}
             reservedReceiveEventFromElectron={whenIPCEventCome}>
-            <button>打包檔案</button>
+            <PackFileBtn>打包檔案</PackFileBtn>
           </FunctionalButtonWrapper>
         </RightSideBtnsWrapper>
       </FlexWrapperMain>

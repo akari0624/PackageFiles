@@ -32,4 +32,19 @@ const promiseUtil = {
   waitTillAllFinished: promise_wait_all,
 }
 
+/* unix, mac osx 換行符號是 \n
+   windows 換行符號是 \r\n
+*/
+const rowBreaker = (() => {
+  const opsys: string = process.platform
+  if (opsys.indexOf('win') > -1){
+    return '\r\n'
+  }
+  return '\n'
+})()
+
+export const OS_Util = {
+  rowBreaker,
+}
+
 export default promiseUtil
